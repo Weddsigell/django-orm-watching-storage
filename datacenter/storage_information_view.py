@@ -1,6 +1,7 @@
-from datacenter.models import Visit
+import pytz
+from datacenter.models import Visit, get_duration
 from django.shortcuts import render
-from main import get_duration, TIME_ZONE
+from django.conf import settings
 
 
 def storage_information_view(request):
@@ -10,7 +11,7 @@ def storage_information_view(request):
     for visit in visits:
         non_closed_visits.append({
             'who_entered': visit.passcard.owner_name,
-            'entered_at': visit.entered_at.astimezone(TIME_ZONE),
+            'entered_at': visit.entered_at.astimezone(pytz.timezone(settings.TIME_ZONE)),
             'duration': get_duration(visit)
         })
 
