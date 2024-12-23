@@ -5,12 +5,19 @@ env.read_env()
 
 
 DATABASES = {
-    'default': env.dict('DEFAULT_DB')
+    'default': {
+        'ENGINE': env.str('ENGINE'),
+        'HOST': env.str('HOST'),
+        'PORT': env.str('PORT'),
+        'NAME': env.str('NAME'),
+        'USER': env.str('USER'),
+        'PASSWORD': env.str('PASSWORD'),
+    }
 }
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env.str('SECRET_KEY')
 
 DEBUG = env.bool("DEBUG", False)
 
